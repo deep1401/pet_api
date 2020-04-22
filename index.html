@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+<meta charset=utf-8 />
+</head>
+<body>
+    <h1>BreedFinder</h1>
+    <div class="form">
+      <h2>Upload the image to know the breed::</h2>
+  <input type='file' onchange="readURL(this)" />
+    <img id="blah" src="#" alt="your image"  width="200" height="200"/>
+    </div>
+
+    <div id="output">
+    <ul id="ul"></ul>
+    </div>
+
+
+
+    <script>
+
+    const readURL=async(input) =>{
+
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+              const img= document.getElementById("blah")
+              img.setAttribute("src",e.target.result)
+
+            };
+
+            reader.readAsDataURL(input.files[0]);
+          }
+
+
+const fileField = document.querySelector('input[type="file"]');
+const ul=document.getElementById("ul");
+const divOutput=document.getElementById("output");
+
+
+var formData = new FormData();
+formData.append('image',fileField.files[0]);
+try {
+  // Insert the url of your api in fetch("URL")
+  const response = await fetch("http://127.0.0.1:5000/predict", {
+    method: 'POST',
+    body:formData
+  });
+  const result = await response.json();
+  console.log(typeof(result))
+const category=result.category
+const probs=result.probs
+console.log(probs)
+const a=Object.keys(result.probs)
+for(var x of a){
+  const li=document.createElement("li");
+  li.innerHTML=`<span style="font-weight:bold">${x}</span>::${probs[x]}`
+  ul.appendChild(li);
+  console.log(x,"-",probs[x])
+}
+
+
+
+} catch (error) {
+  console.error('Error:', error);
+}
+
+
+    }
+
+
+
+
+    </script>
+</body>
+</html>
