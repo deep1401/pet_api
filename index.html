@@ -5,22 +5,214 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+	<style>
+	body{
+	background-color:black;
+	color:white;
+
+
+	}
+	.topimage{
+position:absolute;
+left:0px;
+top:0px;
+}
+	.topimage2{
+position:absolute;
+right:0px;
+top:0px;
+}
+
+.o{
+position:absolute;
+top:50%;
+left:0px;
+}
+.animation{
+position:absolute;
+top:0px;
+left:0px;
+width:100%;
+height:17%;
+background-color:#60347A;
+
+}
+.title{
+color:white;
+position:absolute;
+left:30%;
+right:200px;
+top:10px;
+}
+.title{
+position:absolute;
+top:15%;
+left:15%;
+color:white;
+opacity:1;
+text-align:center;
+animation-name:head;
+animation-duration:3s;
+}
+@keyframes head{
+
+0%{
+left:-600px;
+}
+100%
+{left:15%;
+}
+}
+.quote{
+position:absolute;
+top:17%;
+left:0px;
+width:100%;
+height:5%;
+background-color:#3F0D5E;
+color:white;
+}
+.quotetext{
+position:absolute;
+top:20%;
+left:33%;
+}
+.quotetext{
+position:absolute;
+top:20%;
+left:33%;
+color:white;
+opacity:1;
+text-align:center;
+animation-name:head1;
+animation-duration:3s;
+}
+@keyframes head1{
+
+0%{
+left:-600px;
+}
+100%
+{left:33%;
+}
+}
+.textbelowquote{
+color:white;
+font-family:helvetica;
+position:absolute;
+top:25%;
+
+
+}
+.scan{
+position:absolute;
+top:32%;
+color:white;
+font-family:helvetica;
+
+}
+.ai{
+position:absolute;
+top:21.8%;
+left:50%;
+
+
+}
+.imgfile{
+position:absolute;
+top:100%;
+left:1%;
+
+}
+.form{
+font-family:helvetica;
+position:absolute;
+left:10%;
+}
+.solution{
+position:absolute;
+top:350px;
+left:50px;
+font-family:helvetica;
+font-size:200%;
+ animation-name: example;
+  animation-duration: 1.5s;
+
+}
+
+
+@keyframes example {
+  from {color: white;}
+  to {color: green;}
+  from{color:green;}
+  to {color:#494374;}
+
+}
+input[type="file"]{
+
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+	</style>
+
 
 <meta charset=utf-8 />
 </head>
 <body>
-    <h1>BreedFinder</h1>
+
+<div class="animation">
+<div class="topimage">
+<img src="ostldog.jpg" height="100" width="100"><!--SIZE OF RHINO IMAGE-->
+</div>
+<div class ="topimage2">
+<img src ="ostlcatpic.jpg" height="100" width ="100">
+</div>
+<div class="title">
+<h1>BREED FINDER</h1>
+</div>
+</div>
+<div class="quote">
+<div class="quotetext">
+THE BEST THERAPIST IN LIFE HAS FUR AND FOUR LEGS
+</div>
+</div>
+
+
+<div class="textbelowquote">
+  <font size ="8">AI-based Animal Recognition</font size>
+  </div>
+  <div class="ai">
+  <img src ="ostlmldog.svg" height="300" width ="300">
+  <img src ="ostlmlcat.svg" height="300" width="300">
+</div>
+	</div>
+	<div class="scan">
+<h1>Upload.Identify.Learn.</h1>
+</div>
+
+	</div>
+
+	<div class = "o">
     <div class="form">
-      <h2>Upload the image to know the breed::</h2>
+      <h2>Upload the image to know the breed</h2>
   <input type='file' onchange="readURL(this)" />
-    <img id="blah" src="#" alt="your image"  width="200" height="200"/>
+  <div class="imgfile">
+    <img id="blah" src="#" alt="YOUR IMAGE"  width="300" height="170"/>
+	</div>
     </div>
 
     <div id="output">
     <ul id="ul"></ul>
     </div>
 
-
+</div>
 
     <script>
 
@@ -58,13 +250,14 @@ try {
 const category=result.category
 const probs=result.probs
 console.log(probs)
-const a=Object.keys(result.probs)
-for(var x of a){
+const a=Object.keys(result.category)
+
   const li=document.createElement("li");
-  li.innerHTML=`<span style="font-weight:bold">${x}</span>::${probs[x]}`
+  li.setAttribute("class","solution");
+  li.innerHTML=`<span style="font-weight:bold">${result.category}</span>`
   ul.appendChild(li);
-  console.log(x,"-",probs[x])
-}
+
+
 
 
 
